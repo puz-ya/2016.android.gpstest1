@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.yd.gpstest.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+
+    <Button
+        android:layout_width="75pt"
+        android:layout_height="20pt"
+        android:id="@+id/btnShowLocation"
+        android:text="Get coords!"
+        />
+
+    <TextView
+        android:layout_width="100pt"
+        android:layout_height="50pt"
+        android:layout_marginTop="50pt"
+        android:id="@+id/tv"
+        android:text="Here will be coordinates after refresh"
+        />
+
+</RelativeLayout>
