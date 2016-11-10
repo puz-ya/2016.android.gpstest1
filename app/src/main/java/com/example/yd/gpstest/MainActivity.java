@@ -41,12 +41,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProviderEnabled(String arg0) {
                 // TODO Auto-generated method stub
-
+                tv.setText("Provider enabled: "+arg0);
             }
 
             @Override
             public void onProviderDisabled(String arg0) {
                 // TODO Auto-generated method stub
+                tv.setText("Provider disabled: "+arg0);
 
             }
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             );
             Toast.makeText(this, "Please, Restart an app", Toast.LENGTH_LONG).show();
         }else {
-            Toast.makeText(MainActivity.this, "NONE.", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "We have permissions...", Toast.LENGTH_LONG).show();
         }
 
         Button clickButton = (Button) findViewById(R.id.btnShowLocation);
@@ -76,19 +77,23 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-                if (lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-                    lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                    Toast.makeText(MainActivity.this, "NETWORK.", Toast.LENGTH_LONG).show();
-                    return;
-                }
+                //first - GPS
                 if(lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    //lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-                    lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     Toast.makeText(MainActivity.this, "GPS.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Toast.makeText(MainActivity.this, "NOPE :(", Toast.LENGTH_LONG).show();
+
+                //second - NETWORK
+                if (lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    //lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+                    Toast.makeText(MainActivity.this, "NETWORK.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                Toast.makeText(MainActivity.this, "CANNOT RECEIVE ANYTHING", Toast.LENGTH_LONG).show();
             }
         });
 
